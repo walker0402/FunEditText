@@ -282,6 +282,12 @@ public class FunEditText extends LinearLayout implements View.OnClickListener {
                         listener.onDelete();
                         return false;
                     }
+                }else if (event.getAction() == KeyEvent.ACTION_DOWN
+                        && (event.getKeyCode() == KeyEvent.KEYCODE_0 || event.getKeyCode() == KeyEvent.KEYCODE_1 || event.getKeyCode() == KeyEvent.KEYCODE_2 || event.getKeyCode() == KeyEvent.KEYCODE_3 || event.getKeyCode() == KeyEvent.KEYCODE_4 || event.getKeyCode() == KeyEvent.KEYCODE_5
+                        || event.getKeyCode() == KeyEvent.KEYCODE_6 || event.getKeyCode() == KeyEvent.KEYCODE_7 || event.getKeyCode() == KeyEvent.KEYCODE_8 || event.getKeyCode() == KeyEvent.KEYCODE_9)) {
+                    //google输入法点击数字键也是调用sendKeyEvent而不调用commitText,这里主动转发一次
+                    commitText(event.getKeyCode() - 7+"", 1);
+                    return false;
                 }
                 return super.sendKeyEvent(event);
             }
